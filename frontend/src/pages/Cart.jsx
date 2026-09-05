@@ -36,24 +36,29 @@ if (products.length>0) {
       <div>
         {cartData.map((item, index) => {
           const productData = products.find((product) => product._id === item._id);
+          if (!productData) return null;
+          const displayImage = Array.isArray(productData.image) ? productData.image[0] : productData.image;
 
           return (
             <div key={index} className='grid py-4 text-gray-700 border-t border-b grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4'>
               <div className='flex items-start gap-6'>
-                <img className='w-16 sm:w-20' src={productData.image[0]} alt="Photo" />
+                <img className='w-16 sm:w-20 object-cover rounded' src={displayImage} alt={productData.name || "Product"} />
                 <div>
                   <p className='text-sm font-medium sm:text-lg'>{productData.name}</p>
                   <div className='flex items-center gap-5 mt-2'>
                     <p>
-                      {currency}&nbsp;{productData.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                      {currency}&nbsp;{Number(productData.price || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </p>
                     <p className='px-2 border sm:px-3 sm:py-1 bg-slate-50'>{item.size}</p>
                   </div>
                 </div>
               </div>
               <input
+                id={`cart-qty-${item._id}-${item.size}`}
+                name={`quantity_${item._id}_${item.size}`}
+                aria-label={`Quantity for ${productData.name}`}
                 onChange={(e) => e.target.value === '' || e.target.value === '0' ? null : updateQuantity(item._id, item.size, Number(e.target.value))} 
-                className='px-1 py-1 border max-w-10 sm:max-w-20 sm:px-2' 
+                className='px-1 py-1 border max-w-10 sm:max-w-20 sm:px-2 rounded text-center' 
                 type="number" 
                 min={1} 
                 defaultValue={item.quantity} 

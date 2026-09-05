@@ -43,11 +43,11 @@ const Orders = () => {
           orderData.map((item, index) => (
             <div key={index} className='flex flex-col gap-4 py-4 text-gray-700 border-t border-b md:flex-row md:items-center md:justify-between'>
               <div className='flex items-start gap-6 text-sm'>
-                <img className='w-16 sm:w-20' src={item.image[0]} alt="Photo" />
+                <img className='w-16 sm:w-20 object-cover rounded' src={Array.isArray(item.image) ? item.image[0] : item.image} alt={item.name || "Order item"} />
                 <div>
                   <p className='font-medium sm:text-base'>{item.name}</p>
                   <div className='flex items-center gap-3 mt-1 text-base text-gray-700'>
-                    <p className='text-lg'>{currency}&nbsp;{item.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                    <p className='text-lg'>{currency}&nbsp;{Number(item.price || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                     <p>Quantity:{item.quantity}</p>
                     <p>Size:{item.size}</p>
                   </div>

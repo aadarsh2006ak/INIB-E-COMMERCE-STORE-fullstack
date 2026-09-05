@@ -48,23 +48,13 @@ const Collection = () => {
       );
     }
 
-    setFilterProducts(productsCopy);
-  };
-
-  const sortProduct = () => {
-    let fpCopy = filterProducts.slice();
-
-    switch (sortType) {
-      case "low-high":
-        setFilterProducts(fpCopy.sort((a, b) => a.price - b.price));
-        break;
-      case "high-low":
-        setFilterProducts(fpCopy.sort((a, b) => b.price - a.price));
-        break;
-      default:
-        applyFilter();
-        break;
+    if (sortType === "low-high") {
+      productsCopy.sort((a, b) => a.price - b.price);
+    } else if (sortType === "high-low") {
+      productsCopy.sort((a, b) => b.price - a.price);
     }
+
+    setFilterProducts(productsCopy);
   };
 
   const clearFilters = () => {
@@ -74,11 +64,7 @@ const Collection = () => {
 
   useEffect(() => {
     applyFilter();
-  }, [category, subCategory, search, showSearch,products]);
-
-  useEffect(() => {
-    sortProduct();
-  }, [sortType]);
+  }, [category, subCategory, search, showSearch, products, sortType]);
 
   return (
     <div className="flex flex-col gap-1 pt-10 border-t sm:flex-row sm:gap-10">
@@ -103,8 +89,10 @@ const Collection = () => {
         >
           <p className="mb-3 text-sm font-medium">CATEGORIES</p>
           <div className="flex flex-col gap-2 text-sm font-light text-gray-700">
-            <label className="flex gap-2 cursor-pointer">
+            <label htmlFor="cat-men" className="flex gap-2 cursor-pointer items-center">
               <input
+                id="cat-men"
+                name="category_men"
                 className="w-3"
                 type="checkbox"
                 value={"Men"}
@@ -113,8 +101,10 @@ const Collection = () => {
               />
               Men
             </label>
-            <label className="flex gap-2 cursor-pointer">
+            <label htmlFor="cat-women" className="flex gap-2 cursor-pointer items-center">
               <input
+                id="cat-women"
+                name="category_women"
                 className="w-3"
                 type="checkbox"
                 value={"Women"}
@@ -123,8 +113,10 @@ const Collection = () => {
               />
               Women
             </label>
-            <label className="flex gap-2 cursor-pointer">
+            <label htmlFor="cat-kids" className="flex gap-2 cursor-pointer items-center">
               <input
+                id="cat-kids"
+                name="category_kids"
                 className="w-3"
                 type="checkbox"
                 value={"Kids"}
@@ -143,8 +135,10 @@ const Collection = () => {
         >
           <p className="mb-3 text-sm font-medium">TYPES</p>
           <div className="flex flex-col gap-2 text-sm font-light text-gray-700">
-            <label className="flex gap-2 cursor-pointer">
+            <label htmlFor="type-topwear" className="flex gap-2 cursor-pointer items-center">
               <input
+                id="type-topwear"
+                name="type_topwear"
                 className="w-3"
                 type="checkbox"
                 value={"Topwear"}
@@ -153,8 +147,10 @@ const Collection = () => {
               />
               Topwear
             </label>
-            <label className="flex gap-2 cursor-pointer">
+            <label htmlFor="type-bottomwear" className="flex gap-2 cursor-pointer items-center">
               <input
+                id="type-bottomwear"
+                name="type_bottomwear"
                 className="w-3"
                 type="checkbox"
                 value={"Bottomwear"}
@@ -163,8 +159,10 @@ const Collection = () => {
               />
               Bottomwear
             </label>
-            <label className="flex gap-2 cursor-pointer">
+            <label htmlFor="type-winterwear" className="flex gap-2 cursor-pointer items-center">
               <input
+                id="type-winterwear"
+                name="type_winterwear"
                 className="w-3"
                 type="checkbox"
                 value={"Winterwear"}
@@ -192,8 +190,11 @@ const Collection = () => {
           <Title text1={"ALL"} text2={"COLLECTIONS"} />
           {/* Product Sort */}
           <select
+            id="sort-select"
+            name="sort_type"
+            aria-label="Sort products"
             onChange={(e) => setSortType(e.target.value)}
-            className="px-2 text-sm border-2 border-gray-300"
+            className="px-2 text-sm border-2 border-gray-300 rounded"
           >
             <option value="relevant">Sort by: Relevant</option>
             <option value="low-high">Sort by: Low to High</option>

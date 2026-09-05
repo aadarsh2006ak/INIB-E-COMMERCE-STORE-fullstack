@@ -61,22 +61,37 @@ if (token) {
       {currentState === "Login" ? (
         ""
       ) : (
-        <input onChange={(e)=>setName(e.target.value)} value={name}
+        <input 
+          id="name"
+          name="name"
+          autoComplete="name"
+          onChange={(e)=>setName(e.target.value)} 
+          value={name || ""}
           type="text"
-          className="w-full px-3 py-2 border border-gray-800"
-          placeholder="John Doe"
+          className="w-full px-3 py-2 border border-gray-800 rounded"
+          placeholder="Full Name"
           required
         />
       )}
-      <input onChange={(e)=>setEmail(e.target.value)} value={email}
+      <input 
+        id="email"
+        name="email"
+        autoComplete="email"
+        onChange={(e)=>setEmail(e.target.value)} 
+        value={email || ""}
         type="email"
-        className="w-full px-3 py-2 border border-gray-800"
-        placeholder="hello@gmail.com"
+        className="w-full px-3 py-2 border border-gray-800 rounded"
+        placeholder="Email Address"
         required
       />
-      <input onChange={(e)=>setPassword(e.target.value)} value={password}
+      <input 
+        id="password"
+        name="password"
+        autoComplete={currentState === "Login" ? "current-password" : "new-password"}
+        onChange={(e)=>setPassword(e.target.value)} 
+        value={password || ""}
         type="password"
-        className="w-full px-3 py-2 border border-gray-800"
+        className="w-full px-3 py-2 border border-gray-800 rounded"
         placeholder="Password"
         required
       />

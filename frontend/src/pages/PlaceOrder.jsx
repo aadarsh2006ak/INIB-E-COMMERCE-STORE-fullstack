@@ -135,55 +135,109 @@ switch (method) {
           <Title text1={'DELIVERY'} text2={'INFORMATION'} />
         </div>
         <div className='flex gap-3'>
-          <input required onChange={onChangeHandler} name='firstName' value={formData.firstName}
+          <input 
+            id='firstName'
+            name='firstName'
+            autoComplete='given-name'
+            required 
+            onChange={onChangeHandler} 
+            value={formData.firstName}
             className='w-full px-4 py-2 border border-gray-300 rounded' 
             type="text" 
             placeholder='First Name' 
           />
-          <input required onChange={onChangeHandler} name='lastName' value={formData.lastName}
+          <input 
+            id='lastName'
+            name='lastName'
+            autoComplete='family-name'
+            required 
+            onChange={onChangeHandler} 
+            value={formData.lastName}
             className='w-full px-4 py-2 border border-gray-300 rounded' 
             type="text" 
             placeholder='Last Name' 
           />
         </div>
-        <input required onChange={onChangeHandler} name='email' value={formData.email}
+        <input 
+          id='email'
+          name='email'
+          autoComplete='email'
+          required 
+          onChange={onChangeHandler} 
+          value={formData.email}
           className='w-full px-4 py-2 border border-gray-300 rounded' 
           type="email" 
           placeholder='Email Address' 
         />
-        <input required onChange={onChangeHandler} name='street' value={formData.street}
+        <input 
+          id='street'
+          name='street'
+          autoComplete='street-address'
+          required 
+          onChange={onChangeHandler} 
+          value={formData.street}
           className='w-full px-4 py-2 border border-gray-300 rounded' 
           type="text" 
-          placeholder='Street' 
+          placeholder='Street Address' 
         />
-        <div required className='flex gap-3'>
-          <input onChange={onChangeHandler} name='city' value={formData.city}
+        <div className='flex gap-3'>
+          <input 
+            id='city'
+            name='city'
+            autoComplete='address-level2'
+            required
+            onChange={onChangeHandler} 
+            value={formData.city}
             className='w-full px-4 py-2 border border-gray-300 rounded' 
             type="text" 
             placeholder='City' 
           />
-          <input required onChange={onChangeHandler} name='state' value={formData.state}
+          <input 
+            id='state'
+            name='state'
+            autoComplete='address-level1'
+            required 
+            onChange={onChangeHandler} 
+            value={formData.state}
             className='w-full px-4 py-2 border border-gray-300 rounded' 
             type="text" 
             placeholder='State' 
           />
         </div>
         <div className='flex gap-3'>
-          <input required onChange={onChangeHandler} name='zipcode' value={formData.zipcode}
+          <input 
+            id='zipcode'
+            name='zipcode'
+            autoComplete='postal-code'
+            required 
+            onChange={onChangeHandler} 
+            value={formData.zipcode}
             className='w-full px-4 py-2 border border-gray-300 rounded' 
-            type="number" 
+            type="text" 
             placeholder='Zip Code' 
           />
-          <input required onChange={onChangeHandler} name='country' value={formData.country}
+          <input 
+            id='country'
+            name='country'
+            autoComplete='country-name'
+            required 
+            onChange={onChangeHandler} 
+            value={formData.country}
             className='w-full px-4 py-2 border border-gray-300 rounded' 
             type="text" 
             placeholder='Country' 
           />
         </div>
-        <input required onChange={onChangeHandler} name='phone' value={formData.phone}
+        <input 
+          id='phone'
+          name='phone'
+          autoComplete='tel'
+          required 
+          onChange={onChangeHandler} 
+          value={formData.phone}
           className='w-full px-4 py-2 border border-gray-300 rounded' 
-          type="number" 
-          placeholder='Mobile' 
+          type="tel" 
+          placeholder='Mobile Number' 
         />
       </div>
       {/* Right Side Content */}
