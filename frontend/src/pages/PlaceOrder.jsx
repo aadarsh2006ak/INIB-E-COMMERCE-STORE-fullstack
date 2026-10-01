@@ -113,11 +113,10 @@ switch (method) {
       case 'razorpay':
          const responseRazorpay = await axios.post(backendUrl+'/api/order/razorpay',orderData,{headers:{token}})
          if (responseRazorpay.data.success) {
-          initPay(response.data.order)
+           initPay(responseRazorpay.data.order)
+         } else {
+           toast.error(responseRazorpay.data.message || 'Razorpay order creation failed')
          }
-
-
-
       break;
 }
 

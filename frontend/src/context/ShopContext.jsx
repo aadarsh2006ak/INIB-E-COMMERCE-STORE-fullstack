@@ -33,7 +33,7 @@ const ShopContextProvider = (props) => {
   const addToCart = async (itemId, size) => {
     if (!size) {
       toast.error("Please Select a Size");
-      return;
+      return false;
     } else {
       toast.success("Item Added To The Cart");
     }
@@ -64,6 +64,7 @@ const ShopContextProvider = (props) => {
         console.log(error);
       }
     }
+    return true;
   };
 
   const getCartCount = () => {
