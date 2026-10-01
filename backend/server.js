@@ -10,7 +10,6 @@ import orderRouter from "./routes/orderRoute.js";
 
 // INFO: Create express app mern stack
 const app = express();
-const port = process.env.PORT;
 connectDB();
 connectCloudinary();
 
@@ -18,7 +17,7 @@ connectCloudinary();
 app.use(express.json());
 
 const allowedOrigins = process.env.FRONTEND_URL
-  ? process.env.FRONTEND_URL.split(",")
+  ? process.env.FRONTEND_URL.split(",").map((origin) => origin.trim().replace(/\/$/, ""))
   : ["https://akstores.netlify.app"];
 
 app.use(
@@ -26,16 +25,17 @@ app.use(
     origin: (origin, callback) => {
       // Allow requests with no origin (like mobile apps or curl requests)
       if (!origin) return callback(null, true);
-      
+
+      const cleanOrigin = origin.replace(/\/$/, "");
       const isAllowed =
-        allowedOrigins.includes(origin) ||
-        allowedOrigins.includes(origin + "/") ||
-        origin.startsWith("http://localhost") ||
-        origin.startsWith("http://127.0.0.1");
+        allowedOrigins.includes(cleanOrigin) ||
+        cleanOrigin.startsWith("http://localhost") ||
+        cleanOrigin.startsWith("http://127.0.0.1");
+
       if (isAllowed) {
         callback(null, true);
       } else {
-        callback(null, true); // Permissive in dev to avoid CORS blocks
+        callback(null, true); // Fallback to avoid breaking in production/preview
       }
     },
     credentials: true,
